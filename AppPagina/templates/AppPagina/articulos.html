@@ -1,0 +1,16 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Articulos Formulario </h1>
+{%endblock titulo%}
+
+{% block contenido %}
+<form method="post">
+    {% csrf_token %}
+    <table>
+        {{articulo_formulario.as_table}}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
+{%endblock contenido%}

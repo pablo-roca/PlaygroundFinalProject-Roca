@@ -1,0 +1,31 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Buscar cliente </h1>
+{%endblock titulo%}
+    
+    
+    {%block contenido%}
+
+        <h1>Buscar Cliente por Nombre</h1>
+        <form method="get" action="">
+            {{ form.as_p }}
+            <button type="submit">Buscar</button>
+
+        </form>
+
+        {% if clientes %}
+        <h2>Resultados de la búsqueda:</h2>
+        <ul>
+            {% for cliente in clientes %}
+            <li>{{ cliente.nombre }}  {{ cliente.apellido }} - dni : {{cliente.dni}} - mail: {{cliente.email}}</li>
+            {% endfor %}
+        </ul>
+        
+
+        {% else %}
+        <h3>no hay resultados</h3>
+        {% endif %}
+
+        {% endblock contenido%}
