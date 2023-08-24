@@ -1,0 +1,29 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Lista articulos </h1>
+{%endblock titulo%}
+
+{% block contenido %}
+
+    
+</div>
+
+<div class = "conteiner">
+    <h3 class = "mb-4" > Listar articulos </h3>
+    <a href = "{% url 'AppPagina:articulo'%}"> Nuevo Articulo </a></br>
+    <a href = "{% url 'AppPagina:buscarArticulo'%}"> Buscar Articulo </a>
+    <ul class = "list-group">
+        {%for c in articulo%}
+        <li class ="list-group-item">
+            <p> {{c.nombre}} - {{c.marca}} - {{c.tipo}} - {{c.precio}}
+                <a href = "{% url 'AppPagina:ArticuloDetailView' c.pk %}"> Ver</a>
+                <a href = ""> Editar </a>
+                <a href="{% url 'AppPagina:ArticuloDeleteView' c.pk %}"> Borrar </a>
+            </p>
+        </li>
+        {%endfor%}
+    </ul>
+</div>
+{% endblock contenido%}

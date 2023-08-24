@@ -1,0 +1,22 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Detalle del Cliente </h1>
+{%endblock titulo%}
+
+{% block contenido %}
+
+<div class = "conteiner">
+    <h3 class = "mb-4" > Detalles del cliente </h3>
+    <p> Nombre =<i> {{cliente.nombre}}</i></p>
+    <p> Apellido =<i> {{cliente.apellido}}</i></p>
+    <p> dni =<i> {{cliente.dni}}</i></p>
+    <p> email =<i> {{cliente.email}}</i></p>
+        
+
+    <a href = "{% url 'AppPagina:cliente_list'%}"> volver </a>
+    
+</div>
+{% endblock contenido%}
+

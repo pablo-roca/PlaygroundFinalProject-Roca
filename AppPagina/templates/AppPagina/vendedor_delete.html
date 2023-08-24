@@ -1,0 +1,17 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Borrar vendedor </h1>
+{%endblock titulo%}
+
+{% block contenido %}
+<form method="post">
+    {% csrf_token %}
+    <h4> Estas seguro que deseas borrar el vendedor </br> 
+    <h5> {{vendedor.nombre}} {{vendedor.apellido}} - dni: {{cliente.dni}} - email: {{vendedor.num_vendedor}}
+    <input type="submit" value="Eliminar">
+</form>
+<a href = "{% url 'AppPagina:vendedor_list'%}"> volver </a>
+
+{% endblock contenido%}

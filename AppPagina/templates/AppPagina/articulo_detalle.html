@@ -1,0 +1,21 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Detalles del articulo </h1>
+{%endblock titulo%}
+
+{% block contenido %}
+
+<div class = "conteiner">
+    <h3 class = "mb-4" > Detalles del articulo </h3>
+    <p> Nombre =<i> {{articulo.nombre}}</i></p>
+    <p> Marca =<i> {{articulo.marca}}</i></p>
+    <p> Tipo =<i> {{articulo.tipo}}</i></p>
+    <p> Precio =<i> {{articulo.precio}}</i></p>
+        
+
+    <a href = "{% url 'AppPagina:articulo_list'%}"> volver </a>
+    
+</div>
+{% endblock contenido%}

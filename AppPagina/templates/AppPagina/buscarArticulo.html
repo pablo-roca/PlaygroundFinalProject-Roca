@@ -2,27 +2,27 @@
 {% load static %}
 
 {%block titulo%}
-    <h1 class="mb-5">Buscar cliente </h1>
+    <h1 class="mb-5">Buscar articulo </h1>
 {%endblock titulo%}
     
     
     {%block contenido%}
 
-        <h1>Buscar Cliente por Nombre</h1>
+        <h1>Buscar Articulo por Nombre</h1>
         <form method="get" action="">
             {{ form.as_p }}
             <button type="submit">Buscar</button>
 
         </form>
 
-        {% if clientes %}
+        {% if articulos %}
         <h2>Resultados de la búsqueda:</h2>
         <ul>
-            {% for cliente in clientes %}
-            <li>{{ cliente.nombre }}  {{ cliente.apellido }} - dni : {{cliente.dni}} - mail: {{cliente.email}}
+            {% for articulo in articulos %}
+            <li>{{articulo.nombre}} - {{articulo.marca}} - {{articulo.tipo}} - {{articulo.precio}}
                 <a href = ""> Ver</a>
                 <a href = ""> Editar </a>
-                <a href="{% url 'AppPagina:ClienteDeleteView' cliente.pk %}"> Borrar </a>
+                <a href="{% url 'AppPagina:ArticuloDeleteView' articulo.pk %}"> Borrar </a>
             </li>
             {% endfor %}
         </ul>
@@ -31,6 +31,5 @@
         {% else %}
         <h3>no hay resultados</h3>
         {% endif %}
-        <a href = "{% url 'AppPagina:cliente_list'%}"> volver </a>
-
+        <a href = "{% url 'AppPagina:articulo_list'%}"> volver </a>
         {% endblock contenido%}

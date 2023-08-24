@@ -20,3 +20,7 @@ class VendedorFormulario(forms.ModelForm):
         
 class ClienteSearchForm(forms.Form):
     nombre = forms.CharField(required=False)
+
+class ArticuloSearchForm(forms.Form):
+    nombre = forms.CharField(required=False)
+    

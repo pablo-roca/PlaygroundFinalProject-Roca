@@ -21,11 +21,13 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="/AppPagina/">Inicio</a>
-                <a class="navbar-brand" href="/AppPagina/cliente">crear cliente</a>
-                <a class="navbar-brand" href="/AppPagina/vendedor">crear vendedor</a>
-                <a class="navbar-brand" href="/AppPagina/articulos">crear articulos</a>
-                <a class="navbar-brand" href="/AppPagina/buscarCliente">buscarCliente</a>
+                <a class="navbar-brand" href="{% url 'AppPagina:inicio'%}">Inicio</a>
+                <a class="navbar-brand" href="{% url 'AppPagina:cliente_list'%}">clientes</a>
+                <a class="navbar-brand" href="{% url 'AppPagina:articulo_list'%}">articulos</a>
+                <a class="navbar-brand" href="{% url 'AppPagina:vendedor_list'%}">vendedores</a>
+                <a class="navbar-brand" href="{% url 'AppPagina:cliente'%}">crear cliente</a>
+                <a class="navbar-brand" href="{% url 'AppPagina:vendedor'%}">crear vendedor</a>
+                <a class="navbar-brand" href="{% url 'AppPagina:articulo'%}">crear articulos</a>
             </div>
         </nav>
         <!-- Masthead-->

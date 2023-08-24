@@ -1,0 +1,28 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Lista Cliente </h1>
+{%endblock titulo%}
+
+{% block contenido %}
+<div class = "conteiner">
+    <h3 class = "mb-4" > Listar Clientes </h3>
+    <a href = "{% url 'AppPagina:cliente'%}"> Nuevo Cliente </a></br>
+    <a href = "{% url 'AppPagina:buscarCliente'%}"> Buscar Cliente </a>
+
+    <ul class = "list-group">
+        {%for c in cliente%}
+        <li class ="list-group-item">
+            <p> {{c.nombre}} {{c.apellido}} - dni : {{c.dni}} - email : {{c.email}}
+                <a href = "{% url 'AppPagina:ClienteDetailView' c.pk %}"> Ver</a>
+                <a href = ""> Editar </a>
+                <a href="{% url 'AppPagina:ClienteDeleteView' c.pk %}"> Borrar </a>
+            </p>
+        </li>
+        {%endfor%}
+    </ul>
+    
+</div>
+{% endblock contenido%}
+

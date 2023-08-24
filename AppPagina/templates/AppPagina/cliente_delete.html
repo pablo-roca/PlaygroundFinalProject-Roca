@@ -1,0 +1,17 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Borrar Cliente </h1>
+{%endblock titulo%}
+
+{% block contenido %}
+<form method="post">
+    {% csrf_token %}
+    <h4> Estas seguro que deseas borrar el cliente </br> 
+    <h5> {{cliente.nombre}} {{cliente.apellido}} - dni: {{cliente.dni}} - email: {{cliente.email}}
+    <input type="submit" value="Eliminar">
+</form>
+<a href = "{% url 'AppPagina:cliente_list'%}"> volver </a>
+
+{% endblock contenido%}

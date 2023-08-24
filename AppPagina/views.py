@@ -2,55 +2,21 @@ from django.shortcuts import render, redirect
 from django.template import Template,Context,loader
 from django.http import HttpResponse
 
+from django.urls import reverse_lazy
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Cliente,Articulo, Vendedor
-from .forms import ClienteFormulario, ArticuloFormulario, VendedorFormulario, ClienteSearchForm
+from .forms import ClienteFormulario, ArticuloFormulario, ArticuloSearchForm, ClienteSearchForm
 
 # Create your views here.
 
 
-def cliente(request):
-    if request.method == 'POST':
-        cliente_formulario = ClienteFormulario(request.POST)
-        
-        if cliente_formulario.is_valid:
-            cliente_formulario.save()
-            
-            return redirect('/AppPagina/')
-    else:
-        cliente_formulario = ClienteFormulario()
-    
-        return render(request, 'AppPagina/cliente.html',{"cliente_formulario": cliente_formulario})
-    
+
 
 def inicio(request):
     return render(request,'AppPagina/inicio.html')
 
-def vendedor(request):
-    if request.method == 'POST':
-        vendedor_formulario = VendedorFormulario(request.POST)
-        
-        if vendedor_formulario.is_valid:
-            vendedor_formulario.save()
-            
-            return redirect('/AppPagina/')
-    else:
-        vendedor_formulario = VendedorFormulario()
-    
-    
-    return render(request,'AppPagina/vendedor.html',{"vendedor_formulario":vendedor_formulario})
-
-def articulos(request):
-    if request.method == 'POST':
-        articulo_formulario = ArticuloFormulario(request.POST)
-        
-        if articulo_formulario.is_valid():
-            articulo_formulario.save()       
-            return redirect('/AppPagina/')
-    else:
-        articulo_formulario = ArticuloFormulario()
-    
-    return render(request, 'AppPagina/articulos.html',{"articulo_formulario": articulo_formulario})
-    
 
 def buscarCliente(request):
     clientes = []
@@ -64,3 +30,93 @@ def buscarCliente(request):
             clientes= Cliente.objects.filter(nombre__icontains=nombre)
 
     return render(request, 'AppPagina/buscarCliente.html', {'form': form, 'clientes': clientes})
+
+def buscarArticulo(request):
+    articulos = []
+    form = ArticuloSearchForm(request.GET)
+
+    if form.is_valid():
+        nombre = form.cleaned_data.get('nombre')
+
+        # Realizar la búsqueda en el modelo Curso por nombre
+        if nombre:
+            articulos= Articulo.objects.filter(nombre__icontains=nombre)
+
+    return render(request, 'AppPagina/buscarArticulo.html', {'form': form, 'articulos': articulos})
+
+#cliente vistas
+class ClienteListView(ListView):
+    model = Cliente
+    template_name = 'AppPagina/cliente_list.html'
+    context_object_name = 'cliente'
+
+class ClienteCreateView(CreateView):
+    model = Cliente
+    fields = ['nombre', 'apellido', 'dni', 'email']
+    template_name= 'AppPagina/cliente.html'
+    success_url = reverse_lazy('AppPagina:cliente_list')
+
+class ClienteDeleteView(DeleteView):
+    model = Cliente
+    template_name = 'AppPagina/cliente_delete.html'
+    success_url = reverse_lazy('AppPagina:cliente_list')
+    
+class ClienteDetailView(DetailView):
+    model = Cliente
+    template_name = 'AppPagina/cliente_detalle.html'
+
+class ClienteUpdateView(UpdateView):
+    model = Cliente
+    fields = ['nombre', 'apellido', 'dni', 'email']
+    template_name ='AppPagina/cliente_update.html'
+    success_url = reverse_lazy('AppPagina:cliente_list')
+    
+    
+
+#vendedor vistas
+class VendedorListView(ListView):
+    model = Vendedor
+    template_name ='AppPagina/vendedor_list.html'
+    context_object_name = 'vendedor'
+
+class VendedorCreateView(CreateView):
+    model = Vendedor
+    fields = ['nombre', 'apellido', 'dni', 'num_vendedor']
+    template_name = 'AppPagina/vendedor.html'
+    success_url = reverse_lazy('AppPagina:vendedor_list')
+
+class VendedorDeleteView(DeleteView):
+    model = Vendedor
+    template_name = 'AppPagina/vendedor_delete.html'
+    success_url = reverse_lazy('AppPagina:vendedor_list')
+
+class VendedorDetailView(DetailView):
+    model = Vendedor
+    template_name = 'AppPagina/vendedor_detalle.html'
+
+
+#articulos vistas
+class ArticuloListView(ListView):
+    model = Articulo
+    template_name = 'AppPagina/articulo_list.html'
+    context_object_name = 'articulo'
+
+class ArticuloCreateView(CreateView):
+    model = Articulo
+    fields = ['nombre', 'marca', 'tipo', 'precio']
+    template_name = 'AppPagina/articulos.html'
+    success_url = reverse_lazy('AppPagina:articulo_list')
+        
+class ArticuloDeleteView(DeleteView):
+    model = Articulo
+    template_name = 'AppPagina/articulo_delete.html'
+    success_url = reverse_lazy('AppPagina:articulo_list')
+
+class ArticuloDetailView(DetailView):
+    model = Articulo
+    template_name = 'AppPagina/articulo_detalle.html'
+
+
+    
+    
+    
