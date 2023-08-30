@@ -8,12 +8,13 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Cliente,Articulo, Vendedor
 from .forms import ClienteFormulario, ArticuloFormulario, ArticuloSearchForm, ClienteSearchForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 
 
-
+@login_required
 def inicio(request):
     return render(request,'AppPagina/inicio.html')
 
@@ -45,6 +46,7 @@ def buscarArticulo(request):
     return render(request, 'AppPagina/buscarArticulo.html', {'form': form, 'articulos': articulos})
 
 #cliente vistas
+#---------------------------------------------------------------------------------
 class ClienteListView(ListView):
     model = Cliente
     template_name = 'AppPagina/cliente_list.html'
@@ -74,6 +76,7 @@ class ClienteUpdateView(UpdateView):
     
 
 #vendedor vistas
+#---------------------------------------------------------------------------------
 class VendedorListView(ListView):
     model = Vendedor
     template_name ='AppPagina/vendedor_list.html'
@@ -94,8 +97,15 @@ class VendedorDetailView(DetailView):
     model = Vendedor
     template_name = 'AppPagina/vendedor_detalle.html'
 
+class VendedorUpdateView(UpdateView):
+    model = Vendedor
+    fields = ['nombre', 'apellido', 'dni', 'num_vendedor']
+    template_name ='AppPagina/vendedor_update.html'
+    success_url = reverse_lazy('AppPagina:vendedor_list')
+
 
 #articulos vistas
+#---------------------------------------------------------------------------------
 class ArticuloListView(ListView):
     model = Articulo
     template_name = 'AppPagina/articulo_list.html'
@@ -115,6 +125,12 @@ class ArticuloDeleteView(DeleteView):
 class ArticuloDetailView(DetailView):
     model = Articulo
     template_name = 'AppPagina/articulo_detalle.html'
+    
+class ArticuloUpdateView(UpdateView):
+    model = Articulo
+    fields = ['nombre', 'marca', 'tipo', 'precio']
+    template_name ='AppPagina/articulo_update.html'
+    success_url = reverse_lazy('AppPagina:articulo_list')
 
 
     

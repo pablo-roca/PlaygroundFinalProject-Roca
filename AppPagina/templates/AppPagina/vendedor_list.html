@@ -14,7 +14,7 @@
         <li class ="list-group-item">
             <p> {{c.nombre}} - {{c.apellido}} - {{c.dni}} - vendedor numero : {{c.num_vendedor}}
                 <a href = "{% url 'AppPagina:VendedorDetailView' c.pk %}"> Ver</a>
-                <a href = ""> Editar </a>
+                <a href = "{% url 'AppPagina:VendedorUpdateView' c.pk %}"> Editar </a>
                 <a href="{% url 'AppPagina:VendedorDeleteView' c.pk %}"> Borrar </a>
             </p>
         </li>

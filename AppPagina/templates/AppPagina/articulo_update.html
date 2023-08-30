@@ -1,0 +1,17 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{%block titulo%}
+    <h1 class="mb-5">Editar Articulo </h1>
+{%endblock titulo%}
+
+{% block contenido %}
+<form method="post">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <input type="submit" value="Editar">
+</form>
+<a href = "{% url 'AppPagina:articulo_list'%}"> volver </a>
+{%endblock contenido%}
