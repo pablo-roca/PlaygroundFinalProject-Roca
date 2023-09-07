@@ -1,0 +1,15 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{% block contenido %}
+<h1> Registro </h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <button type="submit">Registrate </button>
+</form>
+
+{% endblock contenido%}

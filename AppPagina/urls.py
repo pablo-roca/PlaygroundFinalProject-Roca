@@ -1,11 +1,18 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.inicio,name='inicio'),
     #path urls buscar de clases
     path('buscarCliente/',views.buscarCliente, name='buscarCliente'),
     path('buscarArticulo/',views.buscarArticulo, name='buscarArticulo'),
+    
+    
+    #path login y logout
+    path('login/',views.login_request, name='login'),
+    path('registro/',views.registro, name='registro'),
+    path('logout/', LogoutView.as_view(template_name='AppPagina/logout.html'), name='logout'),
     
     #path urls de articulo
     path('articulo/nuevo/',views.ArticuloCreateView.as_view(), name='articulo'),

@@ -1,5 +1,6 @@
 from django import forms
 from .models import Articulo, Cliente, Vendedor
+from django.contrib.auth.forms import UserCreationForm, UserModel
 
 class ClienteFormulario(forms.ModelForm):
     class Meta:
@@ -24,3 +25,14 @@ class ClienteSearchForm(forms.Form):
 class ArticuloSearchForm(forms.Form):
     nombre = forms.CharField(required=False)
     
+class UserCreationFormCustom(UserCreationForm):
+    username = forms.CharField(label = "Usuario")
+    email = forms.EmailField()
+    password1 = forms.CharField(label="Contraseña", widget= forms.PasswordInput)
+    password2 = forms.CharField(label="Repetir Contraseña", widget= forms.PasswordInput)
+    class Meta:
+        model = UserModel
+        fields = ['username', 'email', 'password1', 'password2']
+        help_texts = {k:"" for k in fields}
+        
+        

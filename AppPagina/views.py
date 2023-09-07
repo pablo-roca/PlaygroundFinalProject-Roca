@@ -7,13 +7,53 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Cliente,Articulo, Vendedor
-from .forms import ClienteFormulario, ArticuloFormulario, ArticuloSearchForm, ClienteSearchForm
+from .forms import ClienteFormulario, ArticuloFormulario, ArticuloSearchForm, ClienteSearchForm, UserCreationFormCustom
+#login
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+#login 
+#--------------------------------------------------------------------------------------------------
+def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contrasenia = form.cleaned_data.get('password')
+            
+            user = authenticate(username = usuario, password= contrasenia)
+            
+            login(request, user)
+            
+            return render(request,'AppPagina/inicio.html',{"mensaje": f'Bienvenido {user.username}'} )
+    
+    else:
+        form = AuthenticationForm()
+        
+    return render (request, 'AppPagina/login.html', {'form': form})
+
+def registro(request):
+    if request.method == 'POST':
+        form = UserCreationFormCustom(request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            form.save()
+                        
+            return render(request,'AppPagina/inicio.html',{"mensaje": "usuario creado" })
+    
+    else:
+        form = UserCreationFormCustom()
+        
+    return render (request, 'AppPagina/registro.html', {'form': form})
+    
 
 
 
+#--------------------------------------------------------------------------------------------------
 @login_required
 def inicio(request):
     return render(request,'AppPagina/inicio.html')

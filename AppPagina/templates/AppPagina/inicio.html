@@ -28,6 +28,10 @@
                 <a class="navbar-brand" href="{% url 'AppPagina:cliente'%}">crear cliente</a>
                 <a class="navbar-brand" href="{% url 'AppPagina:vendedor'%}">crear vendedor</a>
                 <a class="navbar-brand" href="{% url 'AppPagina:articulo'%}">crear articulos</a>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:login'%}">Login</a>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:registro'%}">Registro</a>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:logout'%}">Logout</a>
+
             </div>
         </nav>
         <!-- Masthead-->
@@ -47,6 +51,12 @@
             </div>
         </header>
         {%block contenido%}
+
+        {%if mensaje%}
+            <p>
+                {{mensaje}}
+            </p>
+        {% endif %}
 
 
         {% endblock contenido%}
