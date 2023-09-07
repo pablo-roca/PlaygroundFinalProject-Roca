@@ -1,0 +1,20 @@
+{% extends 'AppPagina/inicio.html' %}
+{% load static %}
+
+{% block contenido %}
+<h1>Lista de Posts</h1>
+  <ul class="list-group">
+    {% for post in posts %}
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="{% url 'AppPagina:post_update' post.pk %}">{{ post.title }}</a>
+          <div>
+            <a href="{% url 'AppPagina:post_delete' post.pk %}" class="btn btn-danger btn-sm ml-2">Eliminar</a>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'AppPagina:post_create' %}" class="btn btn-primary mt-3">Crear nuevo post</a>
+
+{% endblock contenido%}

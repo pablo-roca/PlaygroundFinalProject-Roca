@@ -1,5 +1,5 @@
 from django import forms
-from .models import Articulo, Cliente, Vendedor
+from .models import Articulo, Cliente, Vendedor, Post
 from django.contrib.auth.forms import UserCreationForm, UserModel
 
 class ClienteFormulario(forms.ModelForm):
@@ -35,4 +35,7 @@ class UserCreationFormCustom(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         help_texts = {k:"" for k in fields}
         
-        
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']

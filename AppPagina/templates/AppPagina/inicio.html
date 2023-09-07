@@ -31,6 +31,21 @@
                 <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:login'%}">Login</a>
                 <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:registro'%}">Registro</a>
                 <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:logout'%}">Logout</a>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'AppPagina:post_list' %}">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'AppPagina:logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'AppPagina:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'AppPagina:register' %}">Register</a>
+                    </li>
+                {% endif %}
 
             </div>
         </nav>

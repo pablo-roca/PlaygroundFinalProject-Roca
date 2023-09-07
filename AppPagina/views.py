@@ -6,8 +6,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Cliente,Articulo, Vendedor
-from .forms import ClienteFormulario, ArticuloFormulario, ArticuloSearchForm, ClienteSearchForm, UserCreationFormCustom
+from .models import Cliente,Articulo, Vendedor, Post
+from .forms import PostForm, ArticuloFormulario, ArticuloSearchForm, ClienteSearchForm, UserCreationFormCustom
 #login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
@@ -173,6 +173,29 @@ class ArticuloUpdateView(UpdateView):
     success_url = reverse_lazy('AppPagina:articulo_list')
 
 
-    
+
+#Post
+#-------------------------------------------------------------------------------------------
+class PostListView(ListView):
+    model = Post
+    template_name = 'AppPagina/post_list.html'
+    context_object_name = 'posts'
+
+class PostCreateView(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'AppPagina/post_create.html'
+    success_url = reverse_lazy('AppPagina:post_list')
+
+class PostUpdateView(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'AppPagina/post_update.html'
+    success_url = reverse_lazy('AppPAgina:post_list')
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'AppPagina/post_delete.html'
+    success_url = reverse_lazy('AppPagina:post_list')    
     
     

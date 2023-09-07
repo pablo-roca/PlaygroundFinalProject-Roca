@@ -36,5 +36,11 @@ urlpatterns = [
     path('cliente/<pk>/', views.ClienteDetailView.as_view(), name='ClienteDetailView'),
     
     
+    #path urls de post
+    path('post_list/', views.PostListView.as_view(), name='post_list'),
+    path('create/', views.PostCreateView.as_view(), name='post_create'),
+    path('update/<int:pk>/', views.PostUpdateView.as_view(), name='post_update'),
+    path('delete/<int:pk>/', views.PostDeleteView.as_view(), name='post_delete'),
+    
     
 ]
