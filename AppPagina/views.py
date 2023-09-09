@@ -12,6 +12,7 @@ from .forms import PostForm, ArticuloFormulario, ArticuloSearchForm, ClienteSear
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 #login 
@@ -92,22 +93,22 @@ class ClienteListView(ListView):
     template_name = 'AppPagina/cliente_list.html'
     context_object_name = 'cliente'
 
-class ClienteCreateView(CreateView):
+class ClienteCreateView(LoginRequiredMixin, CreateView):
     model = Cliente
     fields = ['nombre', 'apellido', 'dni', 'email']
     template_name= 'AppPagina/cliente.html'
     success_url = reverse_lazy('AppPagina:cliente_list')
 
-class ClienteDeleteView(DeleteView):
+class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     model = Cliente
     template_name = 'AppPagina/cliente_delete.html'
     success_url = reverse_lazy('AppPagina:cliente_list')
     
-class ClienteDetailView(DetailView):
+class ClienteDetailView(LoginRequiredMixin, DetailView):
     model = Cliente
     template_name = 'AppPagina/cliente_detalle.html'
 
-class ClienteUpdateView(UpdateView):
+class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     model = Cliente
     fields = ['nombre', 'apellido', 'dni', 'email']
     template_name ='AppPagina/cliente_update.html'
@@ -122,22 +123,22 @@ class VendedorListView(ListView):
     template_name ='AppPagina/vendedor_list.html'
     context_object_name = 'vendedor'
 
-class VendedorCreateView(CreateView):
+class VendedorCreateView(LoginRequiredMixin, CreateView):
     model = Vendedor
     fields = ['nombre', 'apellido', 'dni', 'num_vendedor']
     template_name = 'AppPagina/vendedor.html'
     success_url = reverse_lazy('AppPagina:vendedor_list')
 
-class VendedorDeleteView(DeleteView):
+class VendedorDeleteView(LoginRequiredMixin, DeleteView):
     model = Vendedor
     template_name = 'AppPagina/vendedor_delete.html'
     success_url = reverse_lazy('AppPagina:vendedor_list')
 
-class VendedorDetailView(DetailView):
+class VendedorDetailView(LoginRequiredMixin, DetailView):
     model = Vendedor
     template_name = 'AppPagina/vendedor_detalle.html'
 
-class VendedorUpdateView(UpdateView):
+class VendedorUpdateView(LoginRequiredMixin,UpdateView):
     model = Vendedor
     fields = ['nombre', 'apellido', 'dni', 'num_vendedor']
     template_name ='AppPagina/vendedor_update.html'
@@ -151,13 +152,13 @@ class ArticuloListView(ListView):
     template_name = 'AppPagina/articulo_list.html'
     context_object_name = 'articulo'
 
-class ArticuloCreateView(CreateView):
+class ArticuloCreateView(LoginRequiredMixin, CreateView):
     model = Articulo
     fields = ['nombre', 'marca', 'tipo', 'precio']
     template_name = 'AppPagina/articulos.html'
     success_url = reverse_lazy('AppPagina:articulo_list')
         
-class ArticuloDeleteView(DeleteView):
+class ArticuloDeleteView(LoginRequiredMixin, DeleteView):
     model = Articulo
     template_name = 'AppPagina/articulo_delete.html'
     success_url = reverse_lazy('AppPagina:articulo_list')
@@ -166,7 +167,7 @@ class ArticuloDetailView(DetailView):
     model = Articulo
     template_name = 'AppPagina/articulo_detalle.html'
     
-class ArticuloUpdateView(UpdateView):
+class ArticuloUpdateView(LoginRequiredMixin, UpdateView):
     model = Articulo
     fields = ['nombre', 'marca', 'tipo', 'precio']
     template_name ='AppPagina/articulo_update.html'
@@ -181,19 +182,19 @@ class PostListView(ListView):
     template_name = 'AppPagina/post_list.html'
     context_object_name = 'posts'
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'AppPagina/post_create.html'
     success_url = reverse_lazy('AppPagina:post_list')
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'AppPagina/post_update.html'
     success_url = reverse_lazy('AppPAgina:post_list')
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'AppPagina/post_delete.html'
     success_url = reverse_lazy('AppPagina:post_list')    

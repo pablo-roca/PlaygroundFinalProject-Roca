@@ -8,6 +8,7 @@
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit">Iniciar Sesion </button>
+    <a href="{% url 'AppPagina:registro' %}"> ¿No tienes cuenta?</a>
 </form>
 
 {% endblock contenido%}

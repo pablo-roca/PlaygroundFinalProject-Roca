@@ -21,30 +21,27 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'AppPagina:inicio'%}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'AppPagina:cliente_list'%}">clientes</a>
-                <a class="navbar-brand" href="{% url 'AppPagina:articulo_list'%}">articulos</a>
-                <a class="navbar-brand" href="{% url 'AppPagina:vendedor_list'%}">vendedores</a>
-                <a class="navbar-brand" href="{% url 'AppPagina:cliente'%}">crear cliente</a>
-                <a class="navbar-brand" href="{% url 'AppPagina:vendedor'%}">crear vendedor</a>
-                <a class="navbar-brand" href="{% url 'AppPagina:articulo'%}">crear articulos</a>
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:login'%}">Login</a>
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:registro'%}">Registro</a>
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:logout'%}">Logout</a>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'AppPagina:post_list' %}">Posts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'AppPagina:logout' %}">Logout</a>
-                    </li>
+                    <a class="navbar-brand" href="{% url 'AppPagina:post_list'%}">Inicio</a>
+                    <a class="navbar-brand" href="{% url 'AppPagina:cliente_list'%}">clientes</a>
+                    <a class="navbar-brand" href="{% url 'AppPagina:articulo_list'%}">articulos</a>
+                    <a class="navbar-brand" href="{% url 'AppPagina:vendedor_list'%}">vendedores</a>
+                    
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'AppPagina:login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'AppPagina:register' %}">Register</a>
-                    </li>
+                    <a class="navbar-brand" href="{% url 'AppPagina:articulo_list'%}">articulos</a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:post_list' %}">Posts</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:logout' %}">Logout</a>
+                    <h4>bienvenido</br>
+                        {{user.username}}</h4>
+                    
+                {% else %}
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:login' %}">Login</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'AppPagina:registro' %}">Register</a>
+                    
+                    
                 {% endif %}
 
             </div>
